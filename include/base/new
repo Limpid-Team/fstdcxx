@@ -1,0 +1,13 @@
+#ifndef _FSTDCXX_BASE_NEW_
+#define _FSTDCXX_BASE_NEW_
+
+#include "_fstdcxx/cxx_basedefs.hh"
+#include <cstddef>
+
+FSTDCXX_FORCEINLINE void *operator new(size_t, void *p) noexcept { return p; }
+FSTDCXX_FORCEINLINE void *operator new[](size_t, void *p) noexcept { return p; }
+FSTDCXX_FORCEINLINE void operator delete(void *, void *) noexcept {};
+FSTDCXX_FORCEINLINE void operator delete[](void *, void *) noexcept {};
+void operator delete(void *, size_t) noexcept;
+
+#endif

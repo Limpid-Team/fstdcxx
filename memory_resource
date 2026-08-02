@@ -1,0 +1,29 @@
+#ifndef _FSTDCXX_HOSTED_MEMORY_RESOURCE_
+#define _FSTDCXX_HOSTED_MEMORY_RESOURCE_
+
+#include <_fstdcxx/cxx_basedefs.hh>
+#include <cstddef>
+
+namespace std {
+	namespace pmr {
+		class memory_resource {
+		protected:
+			virtual void *do_allocate(std::size_t bytes, std::size_t alignment) = 0;
+			virtual void do_deallocate(void *p, std::size_t bytes, std::size_t alignment) = 0;
+			virtual bool do_is_equal(const std::pmr::memory_resource &other) const noexcept = 0;
+
+		public:
+			FSTDCXX_FORCEINLINE void *allocate(std::size_t bytes, std::size_t alignment = alignof(std::max_align_t)) {
+				return this->do_allocate(bytes, alignment);
+			}
+			FSTDCXX_FORCEINLINE void deallocate(void *p, std::size_t bytes, std::size_t alignment = alignof(std::max_align_t)) {
+				return this->deallocate(p, bytes, alignment);
+			}
+			FSTDCXX_FORCEINLINE bool is_equal(const memory_resource &other) const noexcept {
+				return this->do_is_equal(other);
+			}
+		};
+	}
+}
+
+#endif

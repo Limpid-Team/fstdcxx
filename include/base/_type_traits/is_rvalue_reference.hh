@@ -1,0 +1,15 @@
+#ifndef _FSTDCXX_BASE_TYPE_TRAITS_IS_RVALUE_REFERENCE_
+#define _FSTDCXX_BASE_TYPE_TRAITS_IS_RVALUE_REFERENCE_
+
+#include "integral_constant.hh"
+
+namespace std {
+	template <typename T>
+	struct is_rvalue_reference : std::false_type {};
+	template <typename T>
+	struct is_rvalue_reference<T &&> : std::true_type {};
+	template <typename T>
+	constexpr bool is_rvalue_reference_v = is_rvalue_reference<T>::value;
+}
+
+#endif

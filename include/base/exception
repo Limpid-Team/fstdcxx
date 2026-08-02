@@ -1,0 +1,55 @@
+#ifndef _FSTDCXX_BASE_EXCEPTION_
+#define _FSTDCXX_BASE_EXCEPTION_
+
+#include <cstddef>
+#include "_fstdcxx/cxx_basedefs.hh"
+
+namespace std {
+	using terminate_handler = void (*)();
+	terminate_handler get_terminate() noexcept;
+	terminate_handler set_terminate(terminate_handler f) noexcept;
+	[[noreturn]] void terminate() noexcept;
+
+	int uncaught_exceptions() noexcept;
+
+	class exception {
+	private:
+		std::size_t _ref_count = 0;
+
+	public:
+		FSTDCXX_FORCEINLINE exception() noexcept {
+		}
+		FSTDCXX_FORCEINLINE exception(const exception &rhs) noexcept : _ref_count(rhs._ref_count) {
+		}
+		FSTDCXX_FORCEINLINE exception &operator=(const exception &rhs) noexcept {
+			_ref_count = rhs._ref_count;
+			return *this;
+		}
+		FSTDCXX_API virtual ~exception();
+		FSTDCXX_API virtual const char *what();
+	};
+	class bad_exception : public exception {
+	};
+	class nested_exception : public exception {
+	};
+
+	/*
+	class _exception_ptr_impl {
+	};
+
+	using exception_ptr = _exception_ptr_impl;*/
+
+	/*exception_ptr current_exception() noexcept;
+	[[noreturn]] void rethrow_exception(exception_ptr p);
+
+	template <class E>
+	exception_ptr make_exception_ptr(E e) noexcept;
+
+	template <class T>
+	[[noreturn]] void throw_with_nested(T &&t);
+
+	template <class E>
+	void rethrow_if_nested(const E &e);*/
+}
+
+#endif

@@ -1,0 +1,8 @@
+#ifndef _FSTDCXX_BASE_FUNCTIONAL_
+#define _FSTDCXX_BASE_FUNCTIONAL_
+
+#include "_functional/invoke.hh"
+#include "_functional/op.hh"
+#include "_functional/misc.hh"
+
+#endif

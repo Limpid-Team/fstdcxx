@@ -1,0 +1,17 @@
+#ifndef _FSTDCXX_BASE_TYPE_TRAITS_IS_FINAL_
+#define _FSTDCXX_BASE_TYPE_TRAITS_IS_FINAL_
+
+#include "integral_constant.hh"
+
+namespace std {
+	template <typename T>
+	struct is_final : std::bool_constant<__is_final(T)> {
+	};
+
+	template <typename T>
+	constexpr bool is_final_v = is_final<T>::value;
+
+#define __cpp_lib_is_final 201402L
+}
+
+#endif

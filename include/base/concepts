@@ -1,0 +1,16 @@
+#ifndef _FSTDCXX_BASE_CONCEPTS_
+#define _FSTDCXX_BASE_CONCEPTS_
+
+#include "_concepts/same_as.hh"
+#include "_concepts/derived_from.hh"
+#include "_concepts/convertible_to.hh"
+#include "_concepts/common_ref.hh"
+#include "_concepts/common_with.hh"
+#include "_concepts/arithm_traits.hh"
+#include "_concepts/assignable_from.hh"
+#include "_concepts/swappable.hh"
+#include "_concepts/ctordtor.hh"
+#include "_concepts/compare.hh"
+#include "_concepts/misc.hh"
+
+#endif

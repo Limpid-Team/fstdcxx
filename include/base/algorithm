@@ -1,0 +1,18 @@
+#ifndef _FSTDCXX_BASE_ALGORITHM_
+#define _FSTDCXX_BASE_ALGORITHM_
+
+#include "_fstdcxx/cxx_basedefs.hh"
+#include "utility"
+
+namespace std {
+	template<typename T>
+	void swap(T &a, T &b) {
+		T tmp = std::move(a);
+		a = std::move(b);
+		b = std::move(tmp);
+	}
+
+	// TODO: Implement the array version.
+}
+
+#endif
