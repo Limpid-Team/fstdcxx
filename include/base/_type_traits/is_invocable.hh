@@ -43,7 +43,7 @@ namespace std {
 	};
 
 	template <typename F, typename... ArgTypes>
-	using invoke_result_t = invoke_result<F, ArgTypes...>;
+	using invoke_result_t = invoke_result<F, ArgTypes...>::type;
 }
 
 #endif
