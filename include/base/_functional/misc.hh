@@ -16,43 +16,6 @@ namespace std {
 		using is_transparent = int;
 	};
 
-	namespace detail {
-		template <typename T>
-		constexpr T &f(T &t) noexcept { return t; }
-		template <typename T>
-		void f(T &&) = delete;
-	}
-
-	template <typename T>
-	class reference_wrapper {
-	public:
-		using type = T;
-
-		template <class U, class = decltype(detail::f<T>(std::declval<U>()), std::enable_if_t<!std::is_same_v<reference_wrapper, std::remove_cvref_t<U>>>())>
-		constexpr reference_wrapper(U &&u) noexcept(noexcept(detail::f<T>(std::forward<U>(u))))
-			: _ptr(std::addressof(detail::f<T>(std::forward<U>(u)))) {}
-
-		reference_wrapper(const reference_wrapper &) noexcept = default;
-
-		reference_wrapper &operator=(const reference_wrapper &x) noexcept = default;
-
-		constexpr operator T &() const noexcept { return *_ptr; }
-		constexpr T &get() const noexcept { return *_ptr; }
-
-		template <class... ArgTypes>
-		constexpr std::invoke_result_t<T &, ArgTypes...>
-		operator()(ArgTypes &&...args) const
-			noexcept(std::is_nothrow_invocable_v<T &, ArgTypes...>) {
-			return std::invoke(get(), std::forward<ArgTypes>(args)...);
-		}
-
-	private:
-		T *_ptr;
-	};
-
-	template <typename T>
-	reference_wrapper(T &) -> reference_wrapper<T>;
-
 	template <typename T>
 	struct unwrap_reference {
 		using type = T;
