@@ -10,4 +10,12 @@ FSTDCXX_FORCEINLINE void operator delete(void *, void *) noexcept {}
 FSTDCXX_FORCEINLINE void operator delete[](void *, void *) noexcept {}
 FSTDCXX_API void operator delete(void *, size_t) noexcept;
 
+namespace std {
+	/// @brief Obtain a pointer to the object located at the storage @p p refers to.
+	template <typename T>
+	[[nodiscard]] constexpr T *launder(T *p) noexcept {
+		return __builtin_launder(p);
+	}
+}
+
 #endif

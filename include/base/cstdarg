@@ -1,5 +1,5 @@
-#ifndef _FSTDCXX_BASE_CSTDINT_
-#define _FSTDCXX_BASE_CSTDINT_
+#ifndef _FSTDCXX_BASE_CSTDARG_
+#define _FSTDCXX_BASE_CSTDARG_
 
 #include <stdarg.h>
 
